@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: linyao <linyao@student.42barcelona.com>    +#+  +:+       +#+        */
+/*   By: linyao <linyao@student.42barcelona.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 13:20:41 by linyao            #+#    #+#             */
-/*   Updated: 2024/09/21 21:29:07 by linyao           ###   ########.fr       */
+/*   Updated: 2024/09/21 17:37:44 by linyao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ char	**split_av(char *input)
 		return (free_array(new), NULL);
 	return (new);
 }
-/*
+
 int main(void)
 {
 	char	input[] = " 	infile << ls | grep &USER 'hello world' >	 \"$PWD\" >>  output.txt ";
@@ -143,17 +143,16 @@ int main(void)
 	}
 	free(res);
 //	char	arr[3][10];
-/
+/*
 	bool	b;
 	b = check_quote("This \"is\' a \' test\" for\' \"something\"");
 	if (b)
 		printf("valid");
 	else
 		printf("invalid");
-/
+*/
 //	arr = split_av("This \'is \" a \'test for \"something");
 //	for (int i = 0; i < 3; i++)
 //		printf("%s\n", arr[1]);
 	return (0);
 }
-*/
