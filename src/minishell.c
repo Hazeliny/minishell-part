@@ -6,7 +6,7 @@
 /*   By: linyao <linyao@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 12:37:25 by linyao            #+#    #+#             */
-/*   Updated: 2024/09/16 12:53:11 by linyao           ###   ########.fr       */
+/*   Updated: 2024/09/22 13:24:12 by linyao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	realize_shell(t_ms *ms)
 		if (input && *input)
 		{
 			add_history(input);
-			ms->av = split_av(input);
+			ms->av = split_av(ms->env, input);
 			if (!ms->av)
 				continue ;
 			free(input);
