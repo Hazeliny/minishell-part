@@ -6,7 +6,7 @@
 /*   By: linyao <linyao@student.42barcelona.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 16:36:43 by linyao            #+#    #+#             */
-/*   Updated: 2024/09/22 14:49:13 by linyao           ###   ########.fr       */
+/*   Updated: 2024/09/22 16:27:43 by linyao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	check_handle_dollar(t_hash *env, char **arr, char **c, char ch)
 	char	*key;
 	char	*env_val;
 
-	if ((ch == D_QUOTE && **c == '$') || (ch = ' ' && **c == '$'))
+	if ((ch == D_QUOTE && **c == '$') || (ch == ' ' && **c == '$'))
 	{
 		(*c)++;
 		key = extract_key(*c);

@@ -6,7 +6,7 @@
 /*   By: linyao <linyao@student.42barcelona.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 13:20:41 by linyao            #+#    #+#             */
-/*   Updated: 2024/09/22 14:48:37 by linyao           ###   ########.fr       */
+/*   Updated: 2024/09/22 15:51:53 by linyao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,10 @@ int main(int ac, char **av, char **env)
 	(void)ac;
 	init_env(&ms, env);
 	res1 = split_av(ms.env, input);
+	for (int i = 0; res1[i] != NULL; i++)
+    {
+        printf("%s\n", res1[i]);
+    }
 	res = process_av(res1, ms.env);
 	for (int i = 0; res[i] != NULL; i++)
 	{
@@ -151,6 +155,7 @@ int main(int ac, char **av, char **env)
 	}
 	free(res);
 	free(res1);
+
 //	char	arr[3][10];
 /*
 	bool	b;

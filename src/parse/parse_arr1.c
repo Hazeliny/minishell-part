@@ -6,7 +6,7 @@
 /*   By: linyao <linyao@student.42barcelona.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 15:03:37 by linyao            #+#    #+#             */
-/*   Updated: 2024/09/22 14:50:42 by linyao           ###   ########.fr       */
+/*   Updated: 2024/09/22 16:52:02 by linyao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,10 @@
 static void	process_quote(char **s, char **new)
 {
 	(*s)++;
-	while (**s != S_QUOTE && **s != D_QUOTE)
+	while (**s && **s != S_QUOTE && **s != D_QUOTE)
 		append_char(new, *(*s)++);
-	(*s)++;
+	if (**s == S_QUOTE || **s == D_QUOTE)
+		(*s)++;
 }
 
 //To deal with the case there is $ syntax without any quote
@@ -48,6 +49,7 @@ static char	*process_analyze(char *s, t_hash *env)
 	}
 	if (!new)
 		append_char(&new, '\0');
+	printf("s:%s\n", new);//
 	return (new);
 }
 
