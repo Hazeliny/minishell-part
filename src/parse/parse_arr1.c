@@ -49,7 +49,6 @@ static char	*process_analyze(char *s, t_hash *env)
 	}
 	if (!new)
 		append_char(&new, '\0');
-	printf("s:%s\n", new);//
 	return (new);
 }
 

@@ -130,7 +130,7 @@ char	**split_av(t_hash *env, char *input)
 		return (free_array(new), NULL);
 	return (new);
 }
-
+/*
 int main(int ac, char **av, char **env)
 {
 	char	input[] = " 	infile << ls | grep $HOME 'hello world' >	 \"$PWD\" >>  output.txt ";
@@ -143,19 +143,15 @@ int main(int ac, char **av, char **env)
 	init_env(&ms, env);
 	res1 = split_av(ms.env, input);
 	for (int i = 0; res1[i] != NULL; i++)
-    {
-        printf("%s\n", res1[i]);
-    }
+        	printf("%s\n", res1[i]);
 	res = process_av(res1, ms.env);
 	for (int i = 0; res[i] != NULL; i++)
 	{
 		printf("%s\n", res[i]);
 		free(res[i]);
-		free(res1[i]);
 	}
 	free(res);
-	free(res1);
-
+*/
 //	char	arr[3][10];
 /*
 	bool	b;
@@ -168,5 +164,7 @@ int main(int ac, char **av, char **env)
 //	arr = split_av("This \'is \" a \'test for \"something");
 //	for (int i = 0; i < 3; i++)
 //		printf("%s\n", arr[1]);
+/*
 	return (0);
 }
+*/
