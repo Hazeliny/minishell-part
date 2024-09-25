@@ -86,8 +86,7 @@ void	check_handle_dollar(t_hash *env, char **arr, char **c, char ch)
 	}
 }
 
-void	handle_quote(t_hash *env, char ***array, char **arr, \
-										char **c, char *start)
+void	handle_quote(t_hash *env, char ***array, char **arr, char **c)
 {
 	char	ch;
 
@@ -97,7 +96,7 @@ void	handle_quote(t_hash *env, char ***array, char **arr, \
 		ch = D_QUOTE;
 	else
 		return ;
-	if (*c > start && *(*c - 1) == ' ' && *arr != NULL)
+	if (*(*c - 1) == ' ' && *arr != NULL)
 		store_to_array(array, arr);
 	append_char(arr, **c);
 	(*c)++;

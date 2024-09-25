@@ -97,13 +97,12 @@ void	split_into_arrays(t_hash *env, char ***new, char *input)
 	input = str;
 	while (*str)
 	{
-		if ((*str == ' ' || *str == '\t') && new_arr)
-		{
-			store_to_array(&new_array, &new_arr);
-			move_over(&str);
-		}
+		renovar_array(&new_array, &new_arr, &str);
 		handle_special(&new_array, &new_arr, &str);
-		handle_quote(env, &new_array, &new_arr, &str, input);
+		if (str == input && (*str == S_QUOTE || *str == D_QUOTE))
+			return (void)(ft_printf("Wrong command format\n"), 0);
+		else
+			handle_quote(env, &new_array, &new_arr, &str);
 		if (is_ordinary(*str))
 			append_char(&new_arr, *str);
 		str++;

@@ -45,3 +45,12 @@ bool	is_ordinary(char c)
 		return (true);
 	return (false);
 }
+
+void	renovar_array(char ***new_array, char **new_arr, char **str)
+{
+	if ((**str == ' ' || **str == '\t') && *new_arr)
+	{
+		store_to_array(new_array, new_arr);
+		move_over(str);
+	}
+}
