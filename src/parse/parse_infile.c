@@ -13,6 +13,22 @@
 #include "../../inc/env.h"
 #include "../../inc/minishell.h"
 
+static void	delete_infile_element(char ***av, char **in)
+{
+	int	i;
+
+	i = 0;
+	if (!*av || !in || !*in)
+		return ;
+	while (in[i])
+	{
+		del_array_em(find_index_array(*av, in[i]), av);
+		i++;
+	}
+}
+
+//add the absolute path of the infile (including "<" or "<<")
+//into two-dimensional array "res"
 static void	assign_infile(char ***av, char ***res, int *i)
 {
 	if (ft_strcmp((*av)[(*i)], LESS_S) == 0)
@@ -53,4 +69,42 @@ char	**get_infile_path(char ***av)
 	}
 	delete_infile_element(av, res);
 	return (res);
+}
+
+//To deal with the cases in which multiple "<" and/or "<<" are included
+//only keep one "<" with one infile
+//only keep one "<" with one infile and one "<<" with one delimiter
+static char	**cut_inf(char **inf, int len)
+{
+	if (ft_strcmp(inf[len - 2], inf[len - 4]) == 0)
+	{
+		while (count_arrays(inf) != 2)
+			del_array_em(0, &inf);
+		return (inf);
+	}
+	else
+	{
+		while (count_arrays(inf) != 4)
+			del_array_em(0, &inf);
+		return (inf);
+	}
+}
+
+//To deal with multiple infiles
+char	**validate_inf(char **inf)
+{
+	int	len;
+
+	if (!inf || !*inf)
+		return (NULL);
+	len = count_arrays(inf);
+	if (ft_strcmp(inf[len - 1], DOUBLE_LESS) == 0)
+	{
+		while (count_arrays(inf) != 1)
+			del_array_em(0, &inf);
+		return (inf);
+	}
+	if (len >= 4)
+		return (cut_inf(inf, len));
+	return (inf);
 }

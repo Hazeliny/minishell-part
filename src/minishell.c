@@ -34,7 +34,7 @@ void	realize_shell(t_ms *ms)
 			free(input);
 			input = NULL;
 			ms->av = process_av(ms->av, ms->env);
-			ms->inf = get_infile_path(&ms->av);//
+			ms->inf = validate_inf(get_infile_path(&ms->av));//
 			do_execs(ms->av, ms->env, ms->raw_env);//
 		}
 		if ((input && ft_strcmp(input, "exit") == 0) || !input)

@@ -80,6 +80,10 @@ int		count_arrays(char **arrays);
 char	**process_av(char **av, struct s_hash *env);
 void	check_handle_dollar(t_hash *env, char **arr, char **c, char ch);
 char    **get_infile_path(char ***av);
+int     find_index_array(char **ar, char *s);
+bool    del_array_em(int inx, char ***av);
+void    init_array(char **arr, int len);
+char    **validate_inf(char **inf);
 
 //Utils
 bool	is_special(const char *s);

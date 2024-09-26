@@ -27,6 +27,7 @@ void	free_array(char **arrays)
 	}
 	if (arrays)
 		free(arrays);
+	arrays = NULL;
 }
 
 int	count_arrays(char **arrays)
@@ -83,4 +84,18 @@ bool	is_compliance(char **as)
 		i++;
 	}
 	return (true);
+}
+
+int	find_index_array(char **ar, char *s)
+{
+	int	i;
+
+	i = 0;
+	while (ar[i])
+	{
+		if (ft_strcmp(ar[i], s) == 0)
+			return (i);
+		i++;
+	}
+	return (-1);
 }
