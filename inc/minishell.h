@@ -6,7 +6,7 @@
 /*   By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 12:14:45 by linyao            #+#    #+#             */
-/*   Updated: 2024/09/25 17:04:36 by linyao           ###   ########.fr       */
+/*   Updated: 2024/09/27 17:29:26 by linyao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ int     find_index_array(char **ar, char *s);
 bool    del_array_em(int inx, char ***av);
 void    init_array(char **arr, int len);
 char    **validate_inf(char **inf);
+char    **get_outfile_path(char ***av);
 
 //Utils
 bool	is_special(const char *s);

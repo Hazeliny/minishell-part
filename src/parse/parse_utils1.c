@@ -6,7 +6,7 @@
 /*   By: linyao <linyao@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 12:23:43 by linyao            #+#    #+#             */
-/*   Updated: 2024/09/26 12:23:49 by linyao           ###   ########.fr       */
+/*   Updated: 2024/09/27 17:22:39 by linyao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	init_array(char **arr, int len)
 
 //copy the content in old two-dimensional array into new one
 //size of new one is reduced by one unit
+//new array also ends with NULL (in init_array)
 static char	**copy_new_arr(char **arr)
 {
 	int	i;
