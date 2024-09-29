@@ -13,16 +13,16 @@
 #include "../../inc/env.h"
 #include "../../inc/minishell.h"
 
-static void	delete_infile_element(char ***av, char **in)
+void	delete_file_element(char ***av, char **fl)
 {
 	int	i;
 
 	i = 0;
-	if (!*av || !in || !*in)
+	if (!*av || !fl || !*fl)
 		return ;
-	while (in[i])
+	while (fl[i])
 	{
-		del_array_em(find_index_array(*av, in[i]), av);
+		del_array_em(find_index_array(*av, fl[i]), av);
 		i++;
 	}
 }
@@ -67,7 +67,7 @@ char	**get_infile_path(char ***av)
 		assign_infile(av, &res, &i);
 		i++;
 	}
-	delete_infile_element(av, res);
+	delete_file_element(av, res);
 	return (res);
 }
 

@@ -38,5 +38,6 @@ t_node  		*init_list(void);
 bool    		add_list(t_node *n, char *key, char *value);
 bool    		del_list(t_node *n, char *key);
 bool    		del_hash(t_hash *env, char *key);
+char    **hash_to_array(t_hash *table);
 
 #endif

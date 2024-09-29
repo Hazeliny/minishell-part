@@ -50,7 +50,6 @@ char	**get_outfile_path(char ***av)
 		assign_outfile(av, &res, &i);
 		i++;
 	}
-//	delete_infile_element(av, res);
-	delete_outfile_element(av, res);
+	delete_file_element(av, res);
 	return (res);
 }

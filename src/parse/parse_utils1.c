@@ -77,3 +77,41 @@ bool	del_array_em(int inx, char ***av)
 	*av = copy_new_arr(*av);
 	return (true);
 }
+
+void    set_outfile_flag(t_ms *ms, char **out)
+{
+	if (!out)
+	{
+		ms->f_out_trunc = false;
+		ms->f_out_append = false;
+	}
+	else if (ft_strcmp(out[count_arrays(out) - 2], MORE_S) == 0)
+	{
+		ms->f_out_trunc = true;
+		ms->f_out_append = false;
+	}
+	else
+	{
+		ms->f_out_trunc = false;
+		ms->f_out_append = true;
+	}
+}
+
+void    set_infile_flag(t_ms *ms, char **in)
+{
+	if (!in)
+	{
+		ms->f_in = false;
+		ms->f_heredoc = false;
+	}
+	else if (ft_strcmp(in[count_arrays(in) - 2], LESS_S) == 0)
+	{
+		ms->f_in = true;
+		ms->f_heredoc = false;
+	}
+	else
+	{
+		ms->f_in = false;
+		ms->f_heredoc = true;
+	}
+}

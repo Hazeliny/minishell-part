@@ -36,6 +36,11 @@ void	realize_shell(t_ms *ms)
 			ms->av = process_av(ms->av, ms->env);
 			ms->inf = validate_inf(get_infile_path(&ms->av));//
 			ms->outf = get_outfile_path(&ms->av);
+			set_outfile_flag(ms, ms->outf);
+			set_infile_flag(ms, ms->inf);
+			ms->av_cmd = transform_av_cmd(ms->av);
+			ms->cmds = transform_cmds(&ms->av);
+			ms->args = transform_args(ms->av);
 			do_execs(ms->av, ms->env, ms->raw_env);//
 		}
 		if ((input && ft_strcmp(input, "exit") == 0) || !input)

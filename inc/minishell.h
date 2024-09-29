@@ -47,11 +47,18 @@ struct	s_hash;
 
 typedef struct s_ms
 {
-	char			**av;
+	char			**av;//{"cat"}{"<"}{"infile"}{"|"}{"gre"}...
 	struct s_hash	*env;
 	char			**raw_env;
 	char			**inf;//input for redirection
 	char			**outf;//output for redirection
+	char			**av_cmd;//arrays with arguments or "|"
+	char			**cmds;//another way to combine cmd and parameters
+	char			***args;//tridimensional arrays for command blocks
+	bool			f_in;// "< infile"
+	bool			f_heredoc;// "<< delimiter"
+	bool			f_out_trunc;// "> outfile"
+	bool			f_out_append;// ">> outfile"
 }	t_ms;
 
 void	init_ms(t_ms *ms, char **env);
@@ -80,11 +87,19 @@ int		count_arrays(char **arrays);
 char	**process_av(char **av, struct s_hash *env);
 void	check_handle_dollar(t_hash *env, char **arr, char **c, char ch);
 char    **get_infile_path(char ***av);
+void    delete_file_element(char ***av, char **fl);
 int     find_index_array(char **ar, char *s);
 bool    del_array_em(int inx, char ***av);
 void    init_array(char **arr, int len);
 char    **validate_inf(char **inf);
 char    **get_outfile_path(char ***av);
+char	**transform_av_cmd(char **av);
+char	**transform_cmds(char ***av);
+char    ***transform_args(char **av);
+
+//---------------------------Redirection------------------------------
+void	set_outfile_flag(t_ms *ms, char **out);
+void	set_infile_flag(t_ms *ms, char **in);
 
 //Utils
 bool	is_special(const char *s);
