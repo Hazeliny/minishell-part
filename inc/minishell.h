@@ -47,6 +47,7 @@ struct	s_hash;
 
 typedef struct s_ms
 {
+	int			ac;
 	char			**av;//{"cat"}{"<"}{"infile"}{"|"}{"gre"}...
 	struct s_hash	*env;
 	char			**raw_env;
@@ -60,6 +61,29 @@ typedef struct s_ms
 	bool			f_out_trunc;// "> outfile"
 	bool			f_out_append;// ">> outfile"
 }	t_ms;
+
+typedef struct s_cmds
+{
+	char	**argv;
+	char	*path;//same with fullpath in t_pipe, but exist in fullpath
+	bool	exist;
+}	t_cmds;
+
+typedef struct s_pipe
+{
+	int	len;
+	int	fdin;
+	int	fdout;
+	int	*p_end;
+	bool	heredoc;
+	int	exitstat;// status when exit
+	int	**pipes;
+	char	**arv;
+	char	**paths;//"/bin""usr/bin""/usr/local/bin"
+//	char	*fullpath;//"/usr/bin/ls" exist or not
+	char	**envir;
+	t_cmds	*cms;
+}	t_pipe;
 
 void	init_ms(t_ms *ms, char **env);
 void	init_env(t_ms *ms, char **env);
@@ -100,6 +124,21 @@ char    ***transform_args(char **av);
 //---------------------------Redirection------------------------------
 void	set_outfile_flag(t_ms *ms, char **out);
 void	set_infile_flag(t_ms *ms, char **in);
+
+//---------------------------Pipe-------------------------------------
+char    **process_cmds(t_ms *ms);
+bool    init_pipe(t_pipe *pipe, int ac, char **av, char **env);
+bool    init_cmds(t_pipe *pipe);
+int     execute_pipe(t_ms *ms, int ac, char **av, char **env);
+void    print_error(char *s, char *file);
+bool    clean_pipe(t_pipe *pipe);
+bool    check_cmd(t_ms *ms, t_pipe *pipe);
+void    get_allpaths(t_pipe *pipe);
+void    extract_path(int i, t_pipe *pipe);
+bool    validate_cmd(t_pipe *pipe, char *cmd, int n);
+
+//process_pipes(&pipe);
+//run_pipe(&pipe);
 
 //Utils
 bool	is_special(const char *s);
