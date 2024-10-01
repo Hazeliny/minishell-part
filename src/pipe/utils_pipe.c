@@ -6,7 +6,7 @@
 /*   By: linyao <linyao@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 16:20:39 by linyao            #+#    #+#             */
-/*   Updated: 2024/09/30 16:20:40 by linyao           ###   ########.fr       */
+/*   Updated: 2024/10/01 12:51:03 by linyao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,94 +14,94 @@
 #include "../../inc/minishell.h"
 #include "../../inc/pipex_bonus.h"
 
-bool	init_cmds(t_pipe *pipe)
+bool	init_cmds(t_pipe *pip)
 {
 	int	i;
 
 	i = 0;
-	pipe->cms = malloc(sizeof(t_cmds) * pipe->len);
-	if (!pipe->cms)
+	pip->cms = malloc(sizeof(t_cmds) * pip->len);
+	if (!pip->cms)
 		return (false);
-	while (i < pipe->len)
+	while (i < pip->len)
 	{
-		pipe->cms[i].argv = NULL;
-		pipe->cms[i].path = NULL;
-		pipe->cms[i].exist = false;
+		pip->cms[i].argv = NULL;
+		pip->cms[i].path = NULL;
+		pip->cms[i].exist = false;
 		i++;
 	}
 	return (true);
 }
 
-bool    init_pipe(t_pipe *pipe, int ac, char **av, char **env)
+bool    init_pipe(t_pipe *pip, int ac, char **av, char **env)
 {
-	pipe->fdin = -1;
-	pipe->fdout = -1;
-	pipe->p_end = NULL;
-	pipe->heredoc = false;
-	pipe->exitstat = EXIT_SUCCESS;
-	pipe->pipes = NULL;
-	pipe->arv = av;
-	pipe->paths = NULL;
-	pipe->envir = env;
-	pipe->cms = NULL;
-	if (ft_strncmp(pipe->arv[1], "here_doc", 8) == 0 && \
-		ft_strncmp(pipe->arv[0], "./minishell", 11) == 0)
-		pipe->heredoc = true;
-	pipe->len = ac - 3 - pipe->heredoc;
-	if (!init_cmds(pipe))
+	pip->fdin = -1;
+	pip->fdout = -1;
+	pip->p_end = NULL;
+	pip->heredoc = false;
+	pip->exitstat = EXIT_SUCCESS;
+	pip->np = NULL;
+	pip->arv = av;
+	pip->paths = NULL;
+	pip->envir = env;
+	pip->cms = NULL;
+	if (ft_strncmp(pip->arv[1], "here_doc", 8) == 0 && \
+		ft_strncmp(pip->arv[0], "./minishell", 11) == 0)
+		pip->heredoc = true;
+	pip->len = ac - 3 - pip->heredoc;
+	if (!init_cmds(pip))
 		return (false);
 	return (true);
 }
 
-bool	clean_pipe(t_pipe *pipe)
+bool	clean_pipe(t_pipe *pip)
 {
 	int	i;
 
 	i = 0;
-	while (i < pipe->len && pipe->cms && pipe->cms[i].argv)
+	while (i < pip->len && pip->cms && pip->cms[i].argv)
 	{
-		free_array(pipe->cms[i].argv);
-		if (pipe->cms[i].exist)
-			free(pipe->cms[i].path);
+		free_array(pip->cms[i].argv);
+		if (pip->cms[i].exist)
+			free(pip->cms[i].path);
 		i++;
 	}
-	free(pipe->cms);
-	if (pipe->paths)
-		free_array(pipe->paths);
-	if (pipe->inf != -1)
-		close(pipe->inf);
-	if (pipe->outf != -1)
-		close(pipe->outf);
-	if (pipe->p_end)
-		free(pipe->p_end);
-	if (pipe->heredoc)
-		unlink(".here_doc");
-	free_array(pipe->pipes);
-	free_array(pipe->arv);
-	free_array(pipe->envir);
+	free(pip->cms);
+	if (pip->paths)
+		free_array(pip->paths);
+	if (pip->inf != -1)
+		close(pip->inf);
+	if (pip->outf != -1)
+		close(pip->outf);
+	if (pip->p_end)
+		free(pip->p_end);
+	if (pip->heredoc)
+		unlink("../../here_doc");
+	free_array(pip->np);
+	free_array(pip->arv);
+	free_array(pip->envir);
 	return (true);
 }
 
-bool	check_cmd(t_ms *ms, t_pipe *pipe)
+bool	check_cmd(t_ms *ms, t_pipe *pip)
 {
 	int	i;
 
-	get_allpaths(pipe);
-	if (pipe->heredoc)
-		open_heredoc(pipe);
+	get_allpaths(pip);
+	if (pip->heredoc)
+		open_heredoc(pip);
 	else
-		open_file(ms, pipe);
+		open_file(ms, pip);
 	i = 0;
-	while (i < pipe->len)
+	while (i < pip->len)
 	{
-		pipe->cms[i].exist = false;
-		pipe->cms[i].argv = \
-			ft_split(pipe->arv[i + 2 + pipe->heredoc], " ");
-		if (!pipe->cms[i].argv)
+		pip->cms[i].exist = false;
+		pip->cms[i].argv = \
+			ft_split(pip->arv[i + 2 + pip->heredoc], " ");
+		if (!pip->cms[i].argv)
 			return (false);
-		if (!(i == 0 && pipe->fdin == -1) &&
-			!(i == pipe->len - 1 && pipe->fdout == -1))
-			extract_path(i, pipe);
+		if (!(i == 0 && pip->fdin == -1) &&
+			!(i == pip->len - 1 && pip->fdout == -1))
+			extract_path(i, pip);
 		i++;
 	}
 	return (true);

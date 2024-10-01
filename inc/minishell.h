@@ -6,7 +6,7 @@
 /*   By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 12:14:45 by linyao            #+#    #+#             */
-/*   Updated: 2024/09/27 17:29:26 by linyao           ###   ########.fr       */
+/*   Updated: 2024/10/01 16:56:52 by linyao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,16 +71,15 @@ typedef struct s_cmds
 
 typedef struct s_pipe
 {
-	int	len;
-	int	fdin;
-	int	fdout;
-	int	*p_end;
+	int		len;
+	int		fdin;
+	int		fdout;
+	int		**p_end;
+	pid_t	*np;
 	bool	heredoc;
-	int	exitstat;// status when exit
-	int	**pipes;
+	int		exitstat;// status when exit, used for $? and $_
 	char	**arv;
 	char	**paths;//"/bin""usr/bin""/usr/local/bin"
-//	char	*fullpath;//"/usr/bin/ls" exist or not
 	char	**envir;
 	t_cmds	*cms;
 }	t_pipe;
@@ -127,18 +126,23 @@ void	set_infile_flag(t_ms *ms, char **in);
 
 //---------------------------Pipe-------------------------------------
 char    **process_cmds(t_ms *ms);
-bool    init_pipe(t_pipe *pipe, int ac, char **av, char **env);
-bool    init_cmds(t_pipe *pipe);
+bool    init_pipe(t_pipe *pip, int ac, char **av, char **env);
+bool    init_cmds(t_pipe *pip);
 int     execute_pipe(t_ms *ms, int ac, char **av, char **env);
 void    print_error(char *s, char *file);
-bool    clean_pipe(t_pipe *pipe);
-bool    check_cmd(t_ms *ms, t_pipe *pipe);
-void    get_allpaths(t_pipe *pipe);
-void    extract_path(int i, t_pipe *pipe);
-bool    validate_cmd(t_pipe *pipe, char *cmd, int n);
-
-//process_pipes(&pipe);
-//run_pipe(&pipe);
+bool    clean_pipe(t_pipe *pip);
+bool    check_cmd(t_ms *ms, t_pipe *pip);
+void    get_allpaths(t_pipe *pip);
+void    extract_path(int i, t_pipe *pip);
+bool    validate_cmd(t_pipe *pip, char *cmd, int n);
+bool    process_pipes(t_pipe *pip);
+bool    run_pipe(t_pipe *pip);
+bool    init_pids(t_pipe *pip);
+bool    clean_fds(t_pipe *pip);
+void    process_sons(t_pipe *pip, int n);
+void    exec_son(t_pipe *pip, int in, int out, int n);
+void    redirection(t_pip *pip, int in, int out);
+bool    wait_sons_id(t_pipe *pip);
 
 //Utils
 bool	is_special(const char *s);

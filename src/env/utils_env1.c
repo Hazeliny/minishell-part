@@ -6,7 +6,7 @@
 /*   By: linyao <linyao@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 13:34:55 by linyao            #+#    #+#             */
-/*   Updated: 2024/09/29 13:35:01 by linyao           ###   ########.fr       */
+/*   Updated: 2024/10/01 11:48:52 by linyao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	join_k_v(char *s1, char *s2, char ***res)
 
 char	**hash_to_array(t_hash *t)
 {
-	int	i;
+	int		i;
 	char	**res;
 	t_node	*tmp;
 

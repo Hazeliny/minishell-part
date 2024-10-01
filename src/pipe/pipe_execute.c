@@ -6,7 +6,7 @@
 /*   By: linyao <linyao@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 11:00:30 by linyao            #+#    #+#             */
-/*   Updated: 2024/09/30 11:01:23 by linyao           ###   ########.fr       */
+/*   Updated: 2024/10/01 12:44:20 by linyao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 bool	do_execute(t_ms *ms)
 {
-	int	i;
+	int		i;
 	bool	flag_pipe;
 	char	**av;
 

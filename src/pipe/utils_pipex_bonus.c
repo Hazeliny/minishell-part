@@ -6,7 +6,7 @@
 /*   By: linyao <linyao@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 16:37:08 by linyao            #+#    #+#             */
-/*   Updated: 2024/08/26 17:49:23 by linyao           ###   ########.fr       */
+/*   Updated: 2024/10/01 12:53:27 by linyao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,58 +41,58 @@ int	open_file(char *file, int flag)
 	return (fd);
 }
 
-void	get_allpaths(t_pipe *pipe)
+void	get_allpaths(t_pipe *pip)
 {
 	int	i;
 
 	i = 0;
-	if (!pipe->envir)
+	if (!pip->envir)
 		return ;
-	while (pipe->envir[i] && ft_strnstr(pipe->envir[i], "PATH", 4) == NULL)
+	while (pip->envir[i] && ft_strnstr(pip->envir[i], "PATH", 4) == NULL)
 		i++;
-	if (pipe->envir[i] && ft_strnstr(pipe->envir[i], "PATH", 4) != NULL)
-		pipe->paths = ft_split(pipe->envir[i] + 5, ':');
+	if (pip->envir[i] && ft_strnstr(pip->envir[i], "PATH", 4) != NULL)
+		pip->paths = ft_split(pip->envir[i] + 5, ':');
 }
 
-bool	validate_cmd(t_pipe *pipe, char *cmd, int n)
+bool	validate_cmd(t_pipe *pip, char *cmd, int n)
 {
 	if (!cmd)
 		return (false);
 	if (access(cmd, F_OK | X_OK) == 0 && ft_strncmp(cmd, "/", 1) == 0)
 	{
-		pipe->cms[n].path = ft_strdup(cmd);
-		if (!pipe->cms[n].path)
+		pip->cms[n].path = ft_strdup(cmd);
+		if (!pip->cms[n].path)
 			return (false);
 		free(cmd);
-		pipe->cms[n].exist = true;
+		pip->cms[n].exist = true;
 		return (true);
 	}
 	free(cmd);
 	return (false);
 }
 
-void	extract_path(int n, t_pipe *pipe)
+void	extract_path(int n, t_pipe *pip)
 {
 	int		i;
 	char	*path;
 	char	*pathcmd;
 
-	if (pipe->cms[n].argv[0] && \
-		validate_cmd(pipe, ft_strdup(pipe->cms[n].argv[0]), n))
+	if (pip->cms[n].argv[0] && \
+		validate_cmd(pip, ft_strdup(pip->cms[n].argv[0]), n))
 		return ;
 	i = 0;
-	while (pipe->paths[i])
+	while (pip->paths[i])
 	{
-		path = ft_strjoin(pipe->paths[i], "/");
-		pathcmd = ft_strjoin(path, pipe->cms[n].argv[0]);
+		path = ft_strjoin(pip->paths[i], "/");
+		pathcmd = ft_strjoin(path, pip->cms[n].argv[0]);
 		free(path);
-		if (validate_cmd(pipe, pathcmd, n))
+		if (validate_cmd(pip, pathcmd, n))
 			return ;
 		i++;
 	}
-	if (!pipe->paths[i])
+	if (!pip->paths[i])
 	{
-		ft_printf("cmd not found: %s\n", pipe->cms[n].argv[0]);
-		pipe->cms[n].exist = false;
+		ft_printf("cmd not found: %s\n", pip->cms[n].argv[0]);
+		pip->cms[n].exist = false;
 	}
 }
