@@ -6,7 +6,7 @@
 /*   By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 12:14:45 by linyao            #+#    #+#             */
-/*   Updated: 2024/10/01 16:56:52 by linyao           ###   ########.fr       */
+/*   Updated: 2024/10/02 11:49:30 by linyao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,9 @@ typedef struct s_ms
 
 typedef struct s_cmds
 {
-	char	**argv;
-	char	*path;//same with fullpath in t_pipe, but exist in fullpath
-	bool	exist;
+	char	**argv;//a complete command with arguments
+	char	*path;//valid path with cmd
+	bool	exist;//flag of whether the command exists
 }	t_cmds;
 
 typedef struct s_pipe

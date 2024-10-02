@@ -6,7 +6,7 @@
 /*   By: linyao <linyao@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 11:00:30 by linyao            #+#    #+#             */
-/*   Updated: 2024/10/01 12:44:20 by linyao           ###   ########.fr       */
+/*   Updated: 2024/10/02 12:25:07 by linyao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ bool	do_execute(t_ms *ms)
 		if (ms->cmds[i][0] == '|')
 		{
 			ms->ac = count_arrays(ms->av_cmd);
-			av = process_cmds(ms);//Ver si se necesita
+			av = process_cmds(ms);
 			execute_pipe(ms, ms->ac + 3, av, hash_to_array(ms->env));
 			free_array(av);
 			flag_pipe = true;
