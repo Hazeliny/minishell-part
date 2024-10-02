@@ -6,7 +6,7 @@
 /*   By: linyao <linyao@student.42barcelona.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 13:20:41 by linyao            #+#    #+#             */
-/*   Updated: 2024/09/22 15:51:53 by linyao           ###   ########.fr       */
+/*   Updated: 2024/10/02 16:26:04 by linyao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,10 +129,10 @@ char	**split_av(t_hash *env, char *input)
 		return (free_array(new), NULL);
 	return (new);
 }
-/*
+
 int main(int ac, char **av, char **env)
 {
-	char	input[] = " 	infile << ls | grep $HOME 'hello world' >	 \"$PWD\" >>  output.txt ";
+	char	input[] = " 	cat << EOF | grep $HOME 'pattern' \"$PWD\" >>  output.txt ";
 	char	**res1;
 	char    **res;
 	t_ms	ms;
@@ -141,6 +141,7 @@ int main(int ac, char **av, char **env)
 	(void)ac;
 	init_env(&ms, env);
 	res1 = split_av(ms.env, input);
+	printf("test\n");//
 	for (int i = 0; res1[i] != NULL; i++)
         	printf("%s\n", res1[i]);
 	res = process_av(res1, ms.env);
@@ -150,7 +151,7 @@ int main(int ac, char **av, char **env)
 		free(res[i]);
 	}
 	free(res);
-*/
+
 //	char	arr[3][10];
 /*
 	bool	b;
@@ -163,7 +164,7 @@ int main(int ac, char **av, char **env)
 //	arr = split_av("This \'is \" a \'test for \"something");
 //	for (int i = 0; i < 3; i++)
 //		printf("%s\n", arr[1]);
-/*
+
 	return (0);
 }
-*/
+

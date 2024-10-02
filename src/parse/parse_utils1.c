@@ -6,7 +6,7 @@
 /*   By: linyao <linyao@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 12:23:43 by linyao            #+#    #+#             */
-/*   Updated: 2024/09/27 17:22:39 by linyao           ###   ########.fr       */
+/*   Updated: 2024/10/02 16:14:54 by linyao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ bool	del_array_em(int inx, char ***av)
 	int	l;
 
 	l = count_arrays(*av);
-	if (inx >= len || inx < 0)
+	if (inx >= l || inx < 0)
 		return (false);
 	if (l == 1)
 	{

@@ -6,7 +6,7 @@
 /*   By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 12:14:45 by linyao            #+#    #+#             */
-/*   Updated: 2024/10/02 11:49:30 by linyao           ###   ########.fr       */
+/*   Updated: 2024/10/02 16:05:04 by linyao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <readline/history.h>
 # include <stdbool.h>
 # include <stdlib.h>
-# include "libft.h"
+# include "../lib/libft/libft.h"
 # include "env.h"
 # include <limits.h>
 # include <sys/errno.h>
@@ -92,8 +92,8 @@ void	realize_shell(t_ms *ms);
 bool	handle_single(bool *s_close, bool *d_close, int *flag);
 bool	handle_double(bool *s_close, bool *d_close, int *flag);
 bool	check_quote(char *s);
-void	split_into_arrays(char ***new, char *input);
-char	**split_av(char *input);
+void	split_into_arrays(struct s_hash *env, char ***new, char *input);
+char	**split_av(struct s_hash *env, char *input);
 void	store_to_array(char ***array, char **arr);
 bool	add_array(char ***array, char *s);
 bool	append_str(char **arr, char *env_val);
@@ -102,13 +102,13 @@ void    renovar_array(char ***new_array, char **new_arr, char **str);
 void	move_over(char **str);
 char	*extract_key(const char *str);
 void	handle_special(char ***array, char **arr, char **c);
-void	handle_quote(t_hash *env, char ***array, char **arr, char **c);
+void	handle_quote(struct s_hash *env, char ***array, char **arr, char **c);
 bool	is_ordinary(char c);
 bool	is_compliance(char **arrays);
 void	free_array(char **arrays);
 int		count_arrays(char **arrays);
 char	**process_av(char **av, struct s_hash *env);
-void	check_handle_dollar(t_hash *env, char **arr, char **c, char ch);
+void	check_handle_dollar(struct s_hash *env, char **arr, char **c, char ch);
 char    **get_infile_path(char ***av);
 void    delete_file_element(char ***av, char **fl);
 int     find_index_array(char **ar, char *s);
@@ -141,7 +141,7 @@ bool    init_pids(t_pipe *pip);
 bool    clean_fds(t_pipe *pip);
 void    process_sons(t_pipe *pip, int n);
 void    exec_son(t_pipe *pip, int in, int out, int n);
-void    redirection(t_pip *pip, int in, int out);
+void    redirection(t_pipe *pip, int in, int out);
 bool    wait_sons_id(t_pipe *pip);
 
 //Utils
@@ -150,9 +150,9 @@ bool	is_special(const char *s);
 //Built-ins
 int		blt_echo(char **av);
 int		blt_exit(char **av);
-int		blt_cd(char **av, t_hash *env);
+int		blt_cd(char **av, struct s_hash *env);
 int		blt_pwd(void);
-int		blt_export(char **av, t_hash *env);
-int		blt_unset(char **av, t_hash *env);
+int		blt_export(char **av, struct s_hash *env);
+int		blt_unset(char **av, struct s_hash *env);
 
 #endif

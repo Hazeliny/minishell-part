@@ -6,7 +6,7 @@
 /*   By: linyao <linyao@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/29 13:34:55 by linyao            #+#    #+#             */
-/*   Updated: 2024/10/01 11:48:52 by linyao           ###   ########.fr       */
+/*   Updated: 2024/10/02 16:20:13 by linyao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	**hash_to_array(t_hash *t)
 		if (t->slot[i])
 		{
 			join_k_v(t->slot[i]->key, t->slot[i]->value, &res);
-			tmp = table->slot[i]->next;
+			tmp = t->slot[i]->next;
 			while (tmp)
 			{
 				join_k_v(tmp->key, tmp->value, &res);

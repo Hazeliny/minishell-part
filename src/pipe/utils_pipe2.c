@@ -6,7 +6,7 @@
 /*   By: linyao <linyao@student.42barcelona.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 15:49:22 by linyao            #+#    #+#             */
-/*   Updated: 2024/10/02 11:55:48 by linyao           ###   ########.fr       */
+/*   Updated: 2024/10/02 15:13:00 by linyao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "../../inc/minishell.h"
 #include "../../inc/pipex_bonus.h"
 
-void	redirection(t_pip *pip, int in, int out)
+void	redirection(t_pipe *pip, int in, int out)
 {
 	if (dup2(in, STDIN_FILENO) == -1)
 	{
