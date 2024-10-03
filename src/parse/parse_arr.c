@@ -6,7 +6,7 @@
 /*   By: linyao <linyao@student.42barcelona.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 17:22:27 by linyao            #+#    #+#             */
-/*   Updated: 2024/09/19 17:22:26 by linyao           ###   ########.fr       */
+/*   Updated: 2024/10/03 16:52:56 by linyao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void	store_to_array(char ***array, char **arr)
 {
-	if (!*arr)
+	if (!arr || !*arr)
 		return ;
 	if (**arr)
 		add_array(array, *arr);
@@ -49,6 +49,7 @@ bool	add_array(char ***array, char *s)
 		return (false);
 	*array = new_arrays;
 	(*array)[count] = ft_strdup(s);
+	(*array)[count + 1] = NULL;
 	return (true);
 }
 

@@ -6,7 +6,7 @@
 /*   By: linyao <linyao@student.42barcelona.co      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 13:20:41 by linyao            #+#    #+#             */
-/*   Updated: 2024/10/02 16:26:04 by linyao           ###   ########.fr       */
+/*   Updated: 2024/10/03 16:54:36 by linyao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,8 @@ void	split_into_arrays(t_hash *env, char ***new, char *input)
 			handle_quote(env, &new_array, &new_arr, &str);
 		if (is_ordinary(*str))
 			append_char(&new_arr, *str);
-		str++;
+		if (*str)
+			str++;
 	}
 	store_to_array(&new_array, &new_arr);
 	*new = new_array;
@@ -141,9 +142,9 @@ int main(int ac, char **av, char **env)
 	(void)ac;
 	init_env(&ms, env);
 	res1 = split_av(ms.env, input);
-	printf("test\n");//
-	for (int i = 0; res1[i] != NULL; i++)
-        	printf("%s\n", res1[i]);
+//	printf("test\n");//
+//	for (int i = 0; res1[i] != NULL; i++)
+//        	printf("%s\n", res1[i]);
 	res = process_av(res1, ms.env);
 	for (int i = 0; res[i] != NULL; i++)
 	{
